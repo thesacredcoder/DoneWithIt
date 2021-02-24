@@ -8,6 +8,7 @@ import ListItem from "./app/components/ListItem";
 import Screen from "./app/components/Screen";
 import AccountScreen from "./app/screens/AccountScreen";
 import ListingDetailsScreen from "./app/screens/ListingDetailsScreen";
+import ListingEditScreen from "./app/screens/ListingEditScreen";
 import ListingsScreen from "./app/screens/ListingsScreen";
 import LoginScreen from "./app/screens/LoginScreen";
 import MesssagesScreen from "./app/screens/MesssagesScreen";
@@ -40,6 +41,7 @@ export default function App() {
     //   />
     //   <AppTextInput placeholder="Write Something" icon="email" />
     // </Screen>
-    <LoginScreen />
+    // <LoginScreen />
+    <ListingEditScreen />
   );
 }
