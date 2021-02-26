@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import AppButton from "./app/components/AppButton";
 import AppPicker from "./app/components/AppPicker";
@@ -15,7 +15,11 @@ import MesssagesScreen from "./app/screens/MesssagesScreen";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 
-// const categories = [
+import * as ImagePicker from "expo-image-picker";
+import * as Permissions from "expo-permissions";
+import ImageInput from "./app/components/ImageInput";
+import ImageInputList from "./app/components/ImageInputList";
+
 //   { label: "Furniture", value: 1 },
 //   { label: "Cameras", value: 2 },
 //   { label: "Clothing", value: 3 },
@@ -23,25 +27,23 @@ import WelcomeScreen from "./app/screens/WelcomeScreen";
 
 export default function App() {
   // const [category, setCategory] = useState(categories[0]);
+  const [imageUris, setImageUris] = useState([]);
+
+  const handleAdd = (uri) => {
+    setImageUris([...setImageUris, uri]);
+  };
+
+  const handleRemove = () => {
+    setImageUris(imageUris.filter((imageUri) => imageUri !== uri));
+  };
 
   return (
-    // <WelcomeScreen />
-    // <ViewImageScreen />
-    // <ListingDetailsScreen />
-    // <MesssagesScreen />
-    // <AccountScreen />
-    // <ListingsScreen />
-    // <Screen>
-    //   <AppPicker
-    //     selectedItem={category}
-    //     onSelectItem={(item) => setCategory(item)}
-    //     items={categories}
-    //     icon="apps"
-    //     placeholder="Category"
-    //   />
-    //   <AppTextInput placeholder="Write Something" icon="email" />
-    // </Screen>
-    // <LoginScreen />
-    <ListingEditScreen />
+    <Screen>
+      <ImageInputList
+        imageUris={imageUris}
+        onAddImage={handleAdd}
+        onRemoveImage={handleRemove}
+      />
+    </Screen>
   );
 }
