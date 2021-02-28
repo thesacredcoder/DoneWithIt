@@ -26,24 +26,5 @@ import ImageInputList from "./app/components/ImageInputList";
 // ];
 
 export default function App() {
-  // const [category, setCategory] = useState(categories[0]);
-  const [imageUris, setImageUris] = useState([]);
-
-  const handleAdd = (uri) => {
-    setImageUris([...setImageUris, uri]);
-  };
-
-  const handleRemove = () => {
-    setImageUris(imageUris.filter((imageUri) => imageUri !== uri));
-  };
-
-  return (
-    <Screen>
-      <ImageInputList
-        imageUris={imageUris}
-        onAddImage={handleAdd}
-        onRemoveImage={handleRemove}
-      />
-    </Screen>
-  );
+  return <ListingEditScreen />;
 }

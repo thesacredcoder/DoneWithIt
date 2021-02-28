@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import {
   View,
   StyleSheet,
+  Image,
   TouchableWithoutFeedback,
   Alert,
 } from "react-native";
@@ -11,15 +12,14 @@ import * as ImagePicker from "expo-image-picker";
 import colors from "../config/colors";
 
 function ImageInput({ imageUri, onChangeImage }) {
+  const requestPermission = async () => {
+    const { granted } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!granted) alert("You need to enable permission to access the library.");
+  };
+
   useEffect(() => {
     requestPermission();
   }, []);
-
-  const requestPermission = async () => {
-    const result = await ImagePicker.requestCameraPermissionsAsync();
-    if (!result.granted)
-      alert("You need to give permission to access the library");
-  };
 
   const handlePress = () => {
     if (!imageUri) selectImage();
@@ -38,7 +38,7 @@ function ImageInput({ imageUri, onChangeImage }) {
       });
       if (!result.cancelled) onChangeImage(result.uri);
     } catch (error) {
-      console.log("Error loading the image", error);
+      console.log("Error reading an image", error);
     }
   };
 
@@ -47,14 +47,12 @@ function ImageInput({ imageUri, onChangeImage }) {
       <View style={styles.container}>
         {!imageUri && (
           <MaterialCommunityIcons
-            name="camera"
             color={colors.medium}
+            name="camera"
             size={40}
           />
         )}
-        {imageUri && (
-          <ImageInput source={{ uri: imageUri }} style={styles.image} />
-        )}
+        {imageUri && <Image source={{ uri: imageUri }} style={styles.image} />}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -67,6 +65,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     height: 100,
     justifyContent: "center",
+    marginVertical: 10,
     overflow: "hidden",
     width: 100,
   },
