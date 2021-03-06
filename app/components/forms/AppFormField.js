@@ -22,7 +22,7 @@ function AppFormField({ name, width, ...otherProps }) {
         {...otherProps}
         width={width}
       />
-      {touched[name] && <ErrorMessage error={errors[name]} />}
+      <ErrorMessage error={errors[name]} visible={touched[name]} />
     </React.Fragment>
   );
 }
